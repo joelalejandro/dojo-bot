@@ -1,6 +1,6 @@
 {
   "name": "dojo-bot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bot para las dailies, con Slack.",
   "main": "index.js",
   "scripts": {
