@@ -8,6 +8,10 @@ const bot = new Bot();
 api.post('/', bot.replyMessage);
 api.post('/challenge', bot.resolveChallenge);
 
-api.start().then(() => {
-  logger.info('API is now ready in localhost:3000');
-});
+if (process.env.NODE_ENV === 'dev') {
+  api.start().then(() => {
+    logger.info('API is now ready in localhost:3000');
+  });
+}
+
+export default { DojoBot: api };
