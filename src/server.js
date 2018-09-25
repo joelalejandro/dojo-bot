@@ -6,6 +6,7 @@ const api = new RestApi({ port: 3000 });
 const bot = new Bot();
 
 api.post('/', bot.replyMessage);
+api.post('/challenge', bot.resolveChallenge);
 
 api.start().then(() => {
   logger.info('API is now ready in localhost:3000');

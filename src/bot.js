@@ -6,8 +6,14 @@ export default class Bot {
   }
 
   replyMessage({ body }, response) {
-    logger.log('info', `Received request: ${JSON.stringify(body)}`);
+    logger.info(`Received request: ${JSON.stringify(body)}`);
     response.send({ received: 'OK' });
-    response.status(200);
+  }
+
+  resolveChallenge({ body }, response) {
+    const { challenge } = body;
+
+    logger.info(`Received Slack Events API challenge: ${challenge}`);
+    response.send({ challenge });
   }
 }
