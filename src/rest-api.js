@@ -1,22 +1,22 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+const express = require('express');
+const bodyParser = require('body-parser');
 
-export default class RestApi {
+module.exports = class RestApi {
   constructor(options) {
     this.options = options;
 
-    this.api = express();
-    this.api.use(bodyParser.json());
+    this.express = express();
+    this.express.use(bodyParser.json());
   }
 
   post(route, ...middlewares) {
-    return this.api.post(route, ...middlewares);
+    return this.express.post(route, ...middlewares);
   }
 
   start() {
     return new Promise((resolve, reject) => {
       try {
-        this.api.listen(this.options.port, () => resolve());
+        this.express.listen(this.options.port, () => resolve());
       } catch (e) {
         reject(e);
       }

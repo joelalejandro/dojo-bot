@@ -2,11 +2,11 @@
   "name": "dojo-bot",
   "version": "0.0.3",
   "description": "Bot para las dailies, con Slack.",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest --config=jest.config.js",
     "start:dev": "NODE_ENV=dev npm run start",
-    "start": "node index.js"
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,9 @@
   "homepage": "https://github.com/joelalejandro/dojo-bot#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "esm": "^3.0.84",
     "express": "^4.16.3",
     "sequelize": "^4.39.0",
+    "serverless-http": "^1.6.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {

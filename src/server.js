@@ -1,17 +1,17 @@
-import logger from './logger';
-import RestApi from './rest-api';
-import Bot from './bot';
+const serverless = require('serverless-http');
+const logger = require('./logger');
+const RestApi = require('./rest-api');
+const Bot = require('./bot');
 
-const api = new RestApi({ port: 3000 });
+const restApi = new RestApi({ port: 3000 });
 const bot = new Bot();
 
-api.post('/', bot.replyMessage);
-api.post('/challenge', bot.resolveChallenge);
+restApi.post('/', bot.replyMessage.bind(bot));
 
-if (process.env.NODE_ENV === 'dev') {
-  api.start().then(() => {
+if (!process.env.AWS_EXECUTION_ENV) {
+  restApi.start().then(() => {
     logger.info('API is now ready in localhost:3000');
   });
 }
 
-export default { DojoBot: api };
+module.exports = { DojoBot: restApi, DojoBotLambda: serverless(restApi.express) };
