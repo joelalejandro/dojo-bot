@@ -5,21 +5,13 @@ module.exports = class Bot {
 
   }
 
-  replyMessage({ body }, response) {
-    logger.info(`Received request: ${JSON.stringify(body)}`);
-
-    if (body.type === 'url_verification') {
-      this.resolveChallenge({ body }, response);
-      return;
+  replyMessage(request, response){
+    if(request.body && request.body.event && 
+      request.body.event.type === 'message' && 
+      request.body.event.channel_type === 'app_home'){
+      response.send("RESPONSE")
+    } else {
+      return response.send("")
     }
-
-    response.send({ received: 'OK' });
-  }
-
-  resolveChallenge({ body }, response) {
-    const { challenge } = body;
-
-    logger.info(`Received Slack Events API challenge: ${challenge}`);
-    response.send({ challenge });
   }
 }
